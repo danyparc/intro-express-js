@@ -54,6 +54,31 @@ app.post('/api/v1/students', (req, res) => {
   res.status(201).send(`El estudiante ${newStudent.name} ha sido creado!`)
 })
 
+const deleteStudentHandler = (req, res) => {
+  const studentId = req.params.id_student
+  // aquí borraría al estudiante de mi DB
+  const borrado = true
+  if (borrado) {
+    res.send(`El estudiante ${studentId} ha sido eliminado`)
+  } else {
+    res.status(500).send(`Error 500: Lo sentimos, algo salió mal`)
+  }
+}
+
+app.delete('/api/v1/students/:id_student', deleteStudentHandler)
+
+app.put('/api/v1/students/:id_student', (req, res)=>{
+  const studentId = req.params.id_student
+  const studentBody = req.body
+  // aquí modificaría al estudiante de mi DB
+  const success = true
+  if (success) {
+    res.send(`El estudiante ${studentId} ha sido modificado: ${studentBody}`)
+  } else {
+    res.status(500).send(`Error 500: Lo sentimos, algo salió mal`)
+  }
+})
+
 // Lanzamos el server
 app.listen(8000, () => {
   console.log('listening on http://localhost:8000')
